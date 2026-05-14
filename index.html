@@ -1,0 +1,1240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Bridgeford — Ranch Living Redefined</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=Archivo:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  /* ── Refreshed palette: warm paper, deep ink, sage + clay accents ── */
+  --paper:      #EDE9E0;
+  --paper-deep: #E3DDD0;
+  --ink:        #1F2420;
+  --ink-soft:   #4A4F47;
+  --ink-faint:  #8C8A7E;
+  --night:      #14160F;
+  --night-2:    #1C1F17;
+  --sage:       #5B6E52;
+  --sage-light: #7B9070;
+  --sage-pale:  #DDE3D3;
+  --clay:       #B5683C;
+  --clay-light: #C97F52;
+  --line:       #C9C2B0;
+  --line-dark:  rgba(237,233,224,0.14);
+}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{
+  font-family:'Archivo',sans-serif;
+  background:var(--paper);
+  color:var(--ink);
+  overflow-x:hidden;
+  -webkit-font-smoothing:antialiased;
+  font-weight:400;
+}
+/* grain */
+body::after{
+  content:'';position:fixed;inset:0;z-index:9999;pointer-events:none;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  opacity:0.035;mix-blend-mode:multiply;
+}
+::selection{background:var(--sage);color:var(--paper);}
+
+/* ─── SCROLLBAR ─── */
+::-webkit-scrollbar{width:8px;}
+::-webkit-scrollbar-track{background:var(--paper-deep);}
+::-webkit-scrollbar-thumb{background:var(--sage);}
+
+/* ─── TYPE HELPERS ─── */
+.serif{font-family:'Fraunces',serif;}
+.eyebrow{
+  font-size:0.66rem;letter-spacing:0.32em;text-transform:uppercase;
+  font-weight:500;color:var(--clay);
+  display:inline-flex;align-items:center;gap:0.9rem;
+}
+.eyebrow::before{content:'';width:32px;height:1px;background:var(--clay);display:block;}
+.idx{
+  font-family:'Fraunces',serif;font-size:0.8rem;font-style:italic;
+  color:var(--ink-faint);font-weight:400;
+}
+
+/* ─── NAV ─── */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:100;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:1.7rem 3.5rem;
+  transition:background .55s ease,padding .4s ease,box-shadow .4s ease,border-color .4s;
+  border-bottom:1px solid transparent;
+}
+nav.solid{
+  background:rgba(20,22,15,0.92);
+  backdrop-filter:blur(14px);
+  padding:1.05rem 3.5rem;
+  border-bottom:1px solid var(--line-dark);
+}
+.nav-logo{
+  font-family:'Fraunces',serif;font-size:1.4rem;font-weight:500;
+  letter-spacing:0.01em;color:var(--paper);text-decoration:none;
+  display:flex;align-items:baseline;gap:0.5rem;
+}
+.nav-logo span{
+  font-family:'Archivo',sans-serif;font-size:0.56rem;letter-spacing:0.3em;
+  text-transform:uppercase;color:var(--clay-light);font-weight:600;
+}
+.nav-links{display:flex;gap:2.4rem;list-style:none;align-items:center;}
+.nav-links a{
+  font-size:0.72rem;letter-spacing:0.14em;text-transform:uppercase;
+  color:var(--paper);opacity:0.62;text-decoration:none;font-weight:400;
+  transition:opacity .3s,color .3s;position:relative;
+}
+.nav-links a::after{
+  content:'';position:absolute;bottom:-5px;left:0;width:0;height:1px;
+  background:var(--clay-light);transition:width .35s ease;
+}
+.nav-links a:hover{opacity:1;color:var(--clay-light);}
+.nav-links a:hover::after{width:100%;}
+.nav-cta{
+  padding:0.62rem 1.5rem !important;
+  border:1px solid var(--clay) !important;
+  color:var(--clay-light) !important;opacity:1 !important;
+  transition:background .35s,color .35s,border-color .35s !important;
+}
+.nav-cta::after{display:none !important;}
+.nav-cta:hover{background:var(--clay) !important;color:var(--paper) !important;border-color:var(--clay) !important;}
+
+/* Hamburger */
+.hamburger{
+  display:none;background:none;border:none;cursor:pointer;
+  width:38px;height:26px;position:relative;z-index:200;
+}
+.hamburger span{
+  display:block;width:100%;height:1.5px;background:var(--paper);
+  position:absolute;left:0;transition:all .35s ease;
+}
+.hamburger span:nth-child(1){top:0;}
+.hamburger span:nth-child(2){top:50%;transform:translateY(-50%);}
+.hamburger span:nth-child(3){bottom:0;}
+.hamburger.open span:nth-child(1){top:50%;transform:translateY(-50%) rotate(45deg);background:var(--clay-light);}
+.hamburger.open span:nth-child(2){opacity:0;}
+.hamburger.open span:nth-child(3){bottom:50%;transform:translateY(50%) rotate(-45deg);background:var(--clay-light);}
+
+.mobile-menu{
+  display:none;position:fixed;inset:0;z-index:99;
+  background:rgba(20,22,15,0.985);backdrop-filter:blur(22px);
+  flex-direction:column;align-items:center;justify-content:center;gap:2.2rem;
+}
+.mobile-menu.open{display:flex;}
+.mobile-menu a{
+  font-family:'Fraunces',serif;font-size:2rem;font-weight:400;font-style:italic;
+  color:var(--paper);text-decoration:none;opacity:0.78;
+  transition:opacity .3s,color .3s;
+}
+.mobile-menu a:hover{opacity:1;color:var(--clay-light);}
+
+/* ─── SECTION DOTS ─── */
+.section-dots{
+  position:fixed;right:2.2rem;top:50%;transform:translateY(-50%);z-index:90;
+  display:flex;flex-direction:column;gap:1.3rem;
+}
+.section-dot{
+  width:9px;height:9px;border-radius:50%;
+  border:1px solid var(--sage);background:transparent;
+  cursor:pointer;transition:all .35s ease;position:relative;
+}
+.section-dot.active{background:var(--sage);transform:scale(1.15);}
+.section-dot .dot-label{
+  position:absolute;right:22px;top:50%;
+  font-size:0.58rem;letter-spacing:0.16em;text-transform:uppercase;
+  color:var(--ink-soft);white-space:nowrap;opacity:0;pointer-events:none;
+  transition:opacity .3s,transform .3s;transform:translateY(-50%) translateX(6px);
+  font-weight:500;
+}
+.section-dot:hover .dot-label{opacity:1;transform:translateY(-50%) translateX(0);}
+/* dots invert over dark sections */
+.section-dots.on-dark .section-dot{border-color:var(--sage-light);}
+.section-dots.on-dark .section-dot.active{background:var(--sage-light);}
+.section-dots.on-dark .section-dot .dot-label{color:var(--paper);}
+
+/* ─── HERO ─── */
+.hero{
+  position:relative;height:100vh;min-height:720px;
+  display:flex;flex-direction:column;justify-content:flex-end;overflow:hidden;
+  background:var(--night);
+}
+.hero-bg{position:absolute;inset:0;overflow:hidden;}
+/* PLACEHOLDER P1 — hero fallback still image */
+.hero-bg-fallback{
+  position:absolute;inset:0;z-index:0;
+  background:#262920 url('P1') center center / cover no-repeat;
+}
+.hero-video-wrap{position:absolute;inset:0;z-index:1;pointer-events:none;overflow:hidden;}
+#hero-yt-player,#ext-yt-player{
+  position:absolute;top:50%;left:50%;
+  width:177.78vh;height:100vh;min-width:100%;min-height:56.25vw;
+  transform:translate(-50%,-50%);pointer-events:none;
+}
+#hero-yt-player iframe,#ext-yt-player iframe{width:100%;height:100%;border:none;}
+
+.hero-overlay{
+  position:absolute;inset:0;z-index:1;
+  background:
+    linear-gradient(to top,rgba(20,22,15,0.92) 0%,rgba(20,22,15,0.35) 45%,rgba(20,22,15,0.15) 100%),
+    linear-gradient(105deg,rgba(20,22,15,0.55) 0%,transparent 55%);
+}
+/* hero top frame line */
+.hero-frame{
+  position:absolute;z-index:2;top:7.5rem;left:3.5rem;right:3.5rem;bottom:2.5rem;
+  border:1px solid rgba(237,233,224,0.18);pointer-events:none;
+}
+.hero-content{
+  position:relative;z-index:3;
+  padding:0 5.5rem 5.5rem;
+  max-width:1000px;color:var(--paper);
+  opacity:0;transform:translateY(38px);
+  animation:heroReveal 1.4s cubic-bezier(.16,1,.3,1) .45s forwards;
+}
+@keyframes heroReveal{to{opacity:1;transform:translateY(0);}}
+.hero-eyebrow{
+  margin-bottom:1.8rem;
+  color:var(--clay-light);
+  opacity:0;animation:fadeIn .9s ease 1s forwards;
+}
+.hero-eyebrow::before{background:var(--clay-light);}
+@keyframes fadeIn{to{opacity:1;}}
+.hero-title{
+  font-family:'Fraunces',serif;
+  font-size:clamp(3.4rem,9.5vw,9rem);
+  font-weight:400;line-height:0.94;letter-spacing:-0.022em;
+  margin-bottom:1.8rem;
+}
+.hero-title em{font-style:italic;font-weight:400;color:var(--sage-light);}
+.hero-subtitle{
+  font-size:1.05rem;line-height:1.8;font-weight:300;
+  color:rgba(237,233,224,0.82);max-width:540px;margin-bottom:3rem;
+}
+.hero-stats{
+  display:flex;gap:0;margin-bottom:3rem;
+  border-top:1px solid rgba(237,233,224,0.2);
+  border-bottom:1px solid rgba(237,233,224,0.2);
+}
+.stat-item{
+  padding:1.6rem 2.4rem 1.6rem 0;margin-right:2.4rem;
+  border-right:1px solid rgba(237,233,224,0.13);
+}
+.stat-item:last-child{border-right:none;margin-right:0;}
+.stat-number{
+  font-family:'Fraunces',serif;font-size:2.4rem;font-weight:400;
+  color:var(--paper);line-height:1;
+}
+.stat-label{
+  font-size:0.6rem;letter-spacing:0.2em;text-transform:uppercase;
+  color:rgba(237,233,224,0.55);margin-top:0.55rem;font-weight:500;
+}
+.hero-ctas{display:flex;gap:1.1rem;flex-wrap:wrap;}
+
+.scroll-hint{
+  position:absolute;bottom:3.2rem;right:5.5rem;z-index:3;
+  display:flex;flex-direction:column;align-items:center;gap:0.6rem;
+  font-size:0.58rem;letter-spacing:0.24em;text-transform:uppercase;
+  color:rgba(237,233,224,0.5);font-weight:500;
+  opacity:0;animation:fadeIn 1s ease 1.9s forwards;
+}
+.scroll-line{
+  width:1px;height:54px;
+  background:linear-gradient(to bottom,var(--clay-light),transparent);
+  animation:scrollPulse 2.4s ease infinite;
+}
+@keyframes scrollPulse{0%,100%{opacity:.25;}50%{opacity:1;}}
+
+/* ─── BUTTONS ─── */
+.btn-primary{
+  display:inline-flex;align-items:center;gap:0.65rem;
+  padding:1.05rem 2.3rem;background:var(--clay);
+  color:var(--paper);font-size:0.72rem;font-weight:600;
+  letter-spacing:0.14em;text-transform:uppercase;text-decoration:none;
+  transition:background .35s,transform .35s,box-shadow .35s;
+  position:relative;overflow:hidden;
+}
+.btn-primary::before{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(120deg,transparent,rgba(255,255,255,0.18),transparent);
+  transform:translateX(-100%);transition:transform .65s;
+}
+.btn-primary:hover{background:var(--clay-light);transform:translateY(-2px);box-shadow:0 12px 30px rgba(181,104,60,0.32);}
+.btn-primary:hover::before{transform:translateX(100%);}
+.btn-outline{
+  display:inline-flex;align-items:center;gap:0.65rem;
+  padding:1.05rem 2.3rem;border:1px solid currentColor;
+  font-size:0.72rem;font-weight:500;letter-spacing:0.14em;
+  text-transform:uppercase;text-decoration:none;
+  transition:background .35s,color .35s,transform .35s;
+}
+.hero-ctas .btn-outline{color:var(--paper);}
+.hero-ctas .btn-outline:hover{background:var(--paper);color:var(--ink);transform:translateY(-2px);}
+
+/* ─── SHARED SECTION ─── */
+section{padding:8rem 4.5rem;}
+.section-head{margin-bottom:3.5rem;}
+.section-title{
+  font-family:'Fraunces',serif;
+  font-size:clamp(2.3rem,4.6vw,3.8rem);
+  font-weight:400;line-height:1.05;letter-spacing:-0.018em;
+  margin-top:1.3rem;
+}
+.section-title em{font-style:italic;color:var(--sage);}
+
+/* ─── REVEAL ─── */
+.reveal{opacity:0;transform:translateY(36px);transition:opacity 1s cubic-bezier(.16,1,.3,1),transform 1s cubic-bezier(.16,1,.3,1);}
+.reveal.visible{opacity:1;transform:translateY(0);}
+.reveal-left{opacity:0;transform:translateX(-44px);transition:opacity 1s cubic-bezier(.16,1,.3,1),transform 1s cubic-bezier(.16,1,.3,1);}
+.reveal-left.visible{opacity:1;transform:translateX(0);}
+.reveal-right{opacity:0;transform:translateX(44px);transition:opacity 1s cubic-bezier(.16,1,.3,1),transform 1s cubic-bezier(.16,1,.3,1);}
+.reveal-right.visible{opacity:1;transform:translateX(0);}
+
+/* ─── FEATURES ─── */
+.features-section{
+  background:var(--paper);padding:0;
+  display:grid;grid-template-columns:0.85fr 1.15fr;
+  position:relative;
+}
+.features-left{
+  padding:8rem 4.5rem;display:flex;flex-direction:column;justify-content:center;
+  border-right:1px solid var(--line);
+  position:sticky;top:0;height:100vh;
+}
+.features-left .lead{
+  font-size:1rem;line-height:1.85;color:var(--ink-soft);
+  font-weight:300;margin:1.8rem 0 1.4rem;
+}
+.features-left .credit{
+  font-size:0.78rem;line-height:1.7;color:var(--ink-faint);font-weight:400;
+  letter-spacing:0.02em;
+}
+.features-callout{
+  margin-top:1.6rem;padding:1.1rem 1.3rem;
+  background:var(--sage-pale);
+  border-left:2px solid var(--sage);
+  font-size:0.82rem;line-height:1.7;color:var(--ink-soft);font-weight:400;
+}
+.features-callout strong{color:var(--sage);font-weight:600;}
+.features-callout a{color:var(--clay);text-decoration:none;border-bottom:1px solid rgba(181,104,60,.35);font-weight:500;}
+.features-callout a:hover{color:var(--clay-light);}
+
+.features-right{display:grid;grid-template-columns:1fr 1fr;}
+.feature-card{
+  padding:3.4rem 3rem;
+  border-bottom:1px solid var(--line);
+  border-right:1px solid var(--line);
+  transition:background .45s ease;
+  position:relative;
+}
+.feature-card:nth-child(2n){border-right:none;}
+.feature-card:nth-last-child(-n+2){border-bottom:none;}
+.feature-card::before{
+  content:'';position:absolute;top:0;left:0;width:0;height:2px;
+  background:var(--clay);transition:width .55s ease;
+}
+.feature-card:hover{background:var(--paper-deep);}
+.feature-card:hover::before{width:100%;}
+.feature-num{
+  font-family:'Fraunces',serif;font-style:italic;font-size:0.85rem;
+  color:var(--ink-faint);margin-bottom:1.4rem;display:block;
+}
+.feature-icon{
+  width:42px;height:42px;margin-bottom:1.3rem;
+  display:flex;align-items:center;justify-content:center;
+  color:var(--sage);
+}
+.feature-icon svg{width:30px;height:30px;}
+.feature-title{
+  font-family:'Fraunces',serif;font-size:1.3rem;font-weight:500;
+  margin-bottom:0.7rem;color:var(--ink);letter-spacing:-0.01em;
+}
+.feature-desc{font-size:0.86rem;line-height:1.78;color:var(--ink-soft);font-weight:300;}
+
+/* ─── GALLERY ─── */
+.gallery-section{background:var(--night);padding:8rem 0;}
+.gallery-header{padding:0 4.5rem;margin-bottom:2.2rem;}
+.gallery-section .eyebrow{color:var(--clay-light);}
+.gallery-section .eyebrow::before{background:var(--clay-light);}
+.gallery-section .section-title{color:var(--paper);}
+.gallery-section .section-title em{color:var(--sage-light);}
+.gallery-filter-bar{display:flex;gap:0.5rem;padding:0 4.5rem;margin-bottom:2.6rem;flex-wrap:wrap;}
+.gallery-filter-btn{
+  padding:0.5rem 1.3rem;font-size:0.62rem;letter-spacing:0.16em;
+  text-transform:uppercase;font-family:'Archivo',sans-serif;font-weight:500;
+  border:1px solid rgba(237,233,224,0.22);
+  background:transparent;color:rgba(237,233,224,0.58);cursor:pointer;
+  transition:all .3s;
+}
+.gallery-filter-btn.active,.gallery-filter-btn:hover{
+  background:var(--clay);border-color:var(--clay);color:var(--paper);
+}
+.gallery-grid{
+  display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));
+  gap:6px;padding:0 4.5rem;
+}
+.gallery-item{overflow:hidden;position:relative;cursor:pointer;height:260px;}
+.gallery-item img{
+  width:100%;height:100%;object-fit:cover;
+  transition:transform .9s cubic-bezier(.16,1,.3,1),filter .6s;
+  filter:brightness(0.82) saturate(0.92);
+}
+.gallery-item:hover img{transform:scale(1.07);filter:brightness(1) saturate(1);}
+.gallery-item .overlay{
+  position:absolute;inset:0;
+  background:linear-gradient(to top,rgba(20,22,15,0.85) 0%,transparent 55%);
+  opacity:0;transition:opacity .45s;
+  display:flex;align-items:flex-end;padding:1.6rem;
+}
+.gallery-item:hover .overlay{opacity:1;}
+.overlay-label{
+  font-family:'Fraunces',serif;font-style:italic;
+  font-size:1rem;color:var(--paper);
+}
+.gallery-badge{
+  position:absolute;top:0.8rem;left:0.8rem;z-index:2;
+  font-size:0.5rem;letter-spacing:0.12em;text-transform:uppercase;
+  padding:3px 9px;font-family:'Archivo',sans-serif;font-weight:600;line-height:1.6;
+}
+.gallery-badge.base{background:var(--sage);color:var(--paper);}
+.gallery-badge.v2{background:var(--clay);color:var(--paper);}
+
+/* ─── LIGHTBOX ─── */
+.lightbox{
+  position:fixed;inset:0;z-index:1000;
+  background:rgba(12,13,9,0.985);display:flex;
+  align-items:center;justify-content:center;
+  opacity:0;pointer-events:none;transition:opacity .4s;
+}
+.lightbox.active{opacity:1;pointer-events:all;}
+.lightbox img{max-width:90vw;max-height:88vh;object-fit:contain;}
+.lightbox-close{
+  position:absolute;top:2rem;right:2.5rem;font-size:1.5rem;
+  color:var(--paper);cursor:pointer;opacity:0.55;
+  transition:opacity .3s;background:none;border:none;
+}
+.lightbox-close:hover{opacity:1;}
+.lightbox-nav{
+  position:absolute;top:50%;transform:translateY(-50%);
+  background:none;border:1px solid rgba(237,233,224,0.3);
+  color:var(--paper);font-size:1.4rem;padding:0.85rem 1.25rem;
+  cursor:pointer;transition:all .3s;
+}
+.lightbox-nav:hover{background:var(--clay);border-color:var(--clay);}
+.lightbox-prev{left:2rem;}
+.lightbox-next{right:2rem;}
+
+/* ─── FLOOR PLANS ─── */
+.floorplan-section{background:var(--paper-deep);color:var(--ink);}
+.fp-side-by-side{display:grid;grid-template-columns:1fr 1fr;gap:2.5rem;margin-top:1rem;}
+.fp-col{display:flex;flex-direction:column;gap:1.1rem;}
+.fp-col-label{
+  font-size:0.66rem;letter-spacing:0.2em;text-transform:uppercase;
+  color:var(--clay);font-weight:600;font-family:'Archivo',sans-serif;
+  display:flex;align-items:center;gap:0.8rem;
+}
+.fp-col-label::before{content:'';height:1px;width:26px;background:var(--clay);display:block;}
+.floorplan-img-wrap{
+  background:var(--paper);border:1px solid var(--line);
+  display:flex;align-items:center;justify-content:center;
+  padding:2.2rem;
+}
+.floorplan-img-wrap img{max-width:100%;object-fit:contain;}
+.fp-mp-btn{
+  display:inline-flex;align-items:center;gap:0.6rem;align-self:flex-start;
+  margin-top:0.4rem;padding:0.9rem 1.9rem;
+  font-size:0.68rem;letter-spacing:0.14em;text-transform:uppercase;
+  font-family:'Archivo',sans-serif;font-weight:600;
+  background:var(--sage);border:none;color:var(--paper);
+  cursor:pointer;text-decoration:none;transition:background .35s,transform .35s;
+}
+.fp-mp-btn:hover{background:var(--sage-light);transform:translateY(-1px);}
+.fp-mp-btn svg{flex-shrink:0;}
+.fp-rooms-grid{
+  display:grid;grid-template-columns:1fr 1fr;
+  gap:3.5rem;margin-top:3.5rem;padding-top:3rem;
+  border-top:1px solid var(--line);
+}
+.fp-rooms-grid h3{
+  font-family:'Fraunces',serif;font-size:1.25rem;font-weight:500;
+  margin-bottom:1.3rem;color:var(--ink);letter-spacing:-0.01em;
+}
+.room-list{list-style:none;}
+.room-list li{
+  padding:0.78rem 0;border-bottom:1px solid rgba(31,36,32,0.09);
+  font-size:0.85rem;color:var(--ink-soft);display:flex;align-items:center;gap:0.8rem;
+  font-weight:300;
+}
+.room-list li::before{
+  content:'';display:block;width:5px;height:5px;
+  background:var(--clay);flex-shrink:0;
+}
+.floorplan-note{
+  margin-top:1.5rem;padding:1.2rem 1.3rem;
+  background:rgba(91,110,82,0.09);border-left:2px solid var(--sage);
+  font-size:0.8rem;color:var(--ink-soft);line-height:1.7;font-weight:300;
+}
+.floorplan-note strong{color:var(--sage);font-weight:600;}
+.fp-footnote{
+  margin-top:2.5rem;padding-top:1.8rem;border-top:1px solid var(--line);
+  text-align:center;
+}
+.fp-footnote p{
+  font-family:'Fraunces',serif;font-style:italic;
+  font-size:0.95rem;line-height:1.8;color:var(--ink-faint);
+}
+.fp-footnote a{color:var(--clay);font-style:normal;font-weight:500;text-decoration:none;border-bottom:1px solid rgba(181,104,60,.4);}
+.fp-footnote a:hover{color:var(--clay-light);}
+
+/* ─── VIDEO BREAK ─── */
+.video-break{
+  position:relative;height:78vh;min-height:520px;
+  overflow:hidden;display:flex;align-items:center;
+  background:var(--night);
+}
+.video-break-iframe-wrap{position:absolute;inset:0;pointer-events:none;}
+.video-break-iframe-wrap iframe{
+  position:absolute;top:50%;left:50%;
+  width:177.78vh;height:100vh;min-width:100%;min-height:56.25vw;
+  transform:translate(-50%,-50%);border:none;
+}
+.video-break-overlay{
+  position:absolute;inset:0;
+  background:linear-gradient(100deg,rgba(20,22,15,0.9) 0%,rgba(20,22,15,0.4) 55%,rgba(20,22,15,0.7) 100%);
+}
+.video-break-content{
+  position:relative;z-index:2;
+  margin-left:5.5rem;max-width:520px;
+  padding:2.8rem 3rem;
+  background:rgba(237,233,224,0.95);
+  backdrop-filter:blur(6px);
+}
+.video-break-content .eyebrow{margin-bottom:1.3rem;}
+.video-break-title{
+  font-family:'Fraunces',serif;
+  font-size:clamp(2rem,3.8vw,3rem);font-weight:400;
+  line-height:1.05;margin-bottom:1.1rem;letter-spacing:-0.018em;color:var(--ink);
+}
+.video-break-title em{font-style:italic;color:var(--sage);}
+.video-break-desc{
+  font-size:0.9rem;line-height:1.85;color:var(--ink-soft);
+  margin-bottom:2rem;font-weight:300;
+}
+.video-break-link{
+  display:inline-flex;align-items:center;gap:0.6rem;
+  font-size:0.7rem;letter-spacing:0.16em;text-transform:uppercase;
+  color:var(--clay);text-decoration:none;font-weight:600;
+  border-bottom:1px solid rgba(181,104,60,0.3);padding-bottom:0.25rem;
+  transition:color .3s,border-color .3s;
+}
+.video-break-link:hover{color:var(--clay-light);border-color:var(--clay-light);}
+.video-break-link .arrow{transition:transform .3s;display:inline-block;}
+.video-break-link:hover .arrow{transform:translateX(5px);}
+
+/* ─── MATTERPORT ─── */
+.matterport-section{background:var(--paper);}
+.matterport-inner{display:grid;grid-template-columns:0.85fr 1.15fr;gap:4.5rem;align-items:center;}
+.matterport-text .lead{
+  font-size:0.92rem;line-height:1.9;color:var(--ink-soft);
+  font-weight:300;margin-bottom:1.8rem;
+}
+.matterport-features{display:flex;flex-direction:column;gap:1.05rem;}
+.mp-feature{
+  display:flex;align-items:flex-start;gap:0.95rem;
+  font-size:0.84rem;color:var(--ink-soft);line-height:1.6;font-weight:300;
+}
+.mp-dot{width:5px;height:5px;background:var(--clay);flex-shrink:0;margin-top:0.5rem;}
+.matterport-embed-wrap{
+  position:relative;aspect-ratio:16/9;
+  background:var(--night);overflow:hidden;
+  box-shadow:0 40px 90px rgba(20,22,15,0.45);
+}
+.matterport-overlay{
+  position:absolute;inset:0;z-index:10;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  gap:1.5rem;cursor:pointer;transition:opacity .6s;
+  background:linear-gradient(135deg,rgba(20,22,15,0.9),rgba(28,31,23,0.86));
+}
+.matterport-overlay.hidden{opacity:0;pointer-events:none;}
+.matterport-preview-img{
+  position:absolute;inset:0;width:100%;height:100%;
+  object-fit:cover;opacity:0.32;
+}
+.matterport-play-ring{
+  position:relative;z-index:1;width:92px;height:92px;
+  border-radius:50%;border:1.5px solid var(--clay-light);
+  display:flex;align-items:center;justify-content:center;
+  transition:transform .4s,background .4s;
+}
+.matterport-overlay:hover .matterport-play-ring{transform:scale(1.1);background:rgba(181,104,60,0.2);}
+.matterport-play-icon{font-size:1.7rem;color:var(--clay-light);margin-left:5px;}
+.matterport-cta-label{
+  position:relative;z-index:1;font-family:'Fraunces',serif;
+  font-size:1.3rem;font-weight:400;font-style:italic;color:var(--paper);
+  text-align:center;line-height:1.3;
+}
+.matterport-cta-label span{
+  display:block;font-family:'Archivo',sans-serif;font-size:0.6rem;font-style:normal;
+  letter-spacing:0.22em;text-transform:uppercase;color:var(--clay-light);
+  margin-bottom:0.5rem;font-weight:600;
+}
+.matterport-embed-wrap iframe{position:absolute;inset:0;width:100%;height:100%;border:none;}
+
+/* ─── CTA ─── */
+.cta-section{
+  position:relative;overflow:hidden;padding:10rem 4.5rem;
+  text-align:center;background:var(--night);
+}
+/* PLACEHOLDER P2 — CTA background image */
+.cta-bg{
+  position:absolute;inset:0;
+  background:url('P2') center 30% / cover no-repeat;
+  opacity:0.18;
+}
+.cta-bg::after{
+  content:'';position:absolute;inset:0;
+  background:radial-gradient(ellipse at center,transparent 0%,var(--night) 78%);
+}
+.cta-content{position:relative;z-index:1;max-width:760px;margin:0 auto;}
+.cta-content .eyebrow{justify-content:center;color:var(--clay-light);}
+.cta-content .eyebrow::before{background:var(--clay-light);}
+.cta-content .section-title{
+  color:var(--paper);font-size:clamp(2.8rem,5.5vw,4.6rem);margin-top:1.5rem;
+}
+.cta-content .section-title em{color:var(--sage-light);}
+.cta-desc{
+  font-size:1.05rem;line-height:1.9;color:rgba(237,233,224,0.78);
+  margin:1.8rem auto 3rem;font-weight:300;max-width:580px;
+}
+.cta-buttons{display:flex;justify-content:center;gap:1.1rem;flex-wrap:wrap;}
+.cta-section .btn-outline{color:var(--paper);}
+.cta-section .btn-outline:hover{background:var(--paper);color:var(--ink);}
+
+/* ─── FOOTER ─── */
+footer{
+  padding:3rem 4.5rem;background:var(--night-2);
+  display:flex;align-items:center;justify-content:space-between;
+  border-top:1px solid var(--line-dark);
+  font-size:0.74rem;color:rgba(237,233,224,0.6);font-weight:300;
+}
+.footer-mark{
+  font-family:'Fraunces',serif;font-size:1rem;color:var(--paper);
+  font-weight:500;letter-spacing:0.01em;
+}
+footer a{color:rgba(237,233,224,0.85);text-decoration:none;transition:color .3s;}
+footer a:hover{color:var(--clay-light);}
+
+/* ─── MATTERPORT MODAL ─── */
+.mp-modal{
+  position:fixed;inset:0;z-index:2000;
+  background:rgba(12,13,9,0.97);
+  display:flex;flex-direction:column;
+  opacity:0;pointer-events:none;transition:opacity .35s;
+}
+.mp-modal.active{opacity:1;pointer-events:all;}
+.mp-modal-bar{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:1rem 1.6rem;background:rgba(20,22,15,0.98);
+  border-bottom:1px solid var(--line-dark);flex-shrink:0;
+}
+.mp-modal-title{font-family:'Fraunces',serif;font-size:1.15rem;color:var(--paper);font-weight:500;}
+.mp-modal-title span{
+  font-family:'Archivo',sans-serif;font-size:0.6rem;
+  letter-spacing:0.2em;text-transform:uppercase;color:var(--clay-light);
+  display:block;font-weight:600;margin-top:2px;
+}
+.mp-modal-close{
+  background:none;border:1px solid rgba(237,233,224,0.3);color:var(--paper);
+  font-size:0.7rem;cursor:pointer;opacity:0.8;transition:all .3s;
+  padding:0.5rem 1.1rem;letter-spacing:0.12em;text-transform:uppercase;
+  font-family:'Archivo',sans-serif;font-weight:500;
+}
+.mp-modal-close:hover{opacity:1;border-color:var(--clay-light);}
+.mp-modal iframe{flex:1;width:100%;border:none;}
+
+/* ── Floor Plan Hotspot Dots ── */
+.fp-hotspot-wrap{position:relative !important;overflow:visible !important;}
+.fp-dot{
+  position:absolute;z-index:20;width:20px;height:20px;
+  background:var(--clay);border:2.5px solid var(--paper);
+  border-radius:50%;cursor:pointer;
+  transform:translate(-50%,-50%);
+  box-shadow:0 2px 10px rgba(20,22,15,0.3);
+  transition:transform .2s,background .2s;
+}
+.fp-dot::before{
+  content:'';position:absolute;inset:-7px;border-radius:50%;
+  border:1.5px solid rgba(181,104,60,0.4);
+  animation:dotPulse 2.2s ease infinite;
+}
+@keyframes dotPulse{0%,100%{transform:scale(1);opacity:.9;}60%{transform:scale(1.7);opacity:0;}}
+.fp-dot:hover{transform:translate(-50%,-50%) scale(1.15);background:var(--sage);z-index:50;}
+.fp-dot-popup{
+  position:absolute;bottom:calc(100% + 12px);left:50%;
+  transform:translateX(-50%);width:210px;
+  background:var(--paper);border:1px solid var(--line);
+  box-shadow:0 14px 36px rgba(20,22,15,0.18);
+  padding:8px;opacity:0;pointer-events:none;
+  transition:opacity .18s;z-index:30;
+}
+.fp-dot:hover .fp-dot-popup,.fp-dot.active .fp-dot-popup{opacity:1;pointer-events:auto;}
+.fp-dot-popup img{width:100%;height:128px;object-fit:cover;display:block;}
+.fp-dot-label{
+  font-family:'Archivo',sans-serif;font-size:10.5px;font-weight:600;
+  color:var(--sage);text-transform:uppercase;letter-spacing:0.08em;
+  margin-top:6px;text-align:center;
+}
+.fp-dot-popup::after{
+  content:'';position:absolute;top:100%;left:50%;
+  transform:translateX(-50%);border:6px solid transparent;border-top-color:var(--line);
+}
+.fp-dot-popup::before{
+  content:'';position:absolute;top:calc(100% - 1px);left:50%;
+  transform:translateX(-50%);border:5px solid transparent;border-top-color:var(--paper);z-index:1;
+}
+
+/* stagger delays */
+.features-right .feature-card:nth-child(2){transition-delay:.08s}
+.features-right .feature-card:nth-child(3){transition-delay:.16s}
+.features-right .feature-card:nth-child(4){transition-delay:.24s}
+.features-right .feature-card:nth-child(5){transition-delay:.32s}
+.features-right .feature-card:nth-child(6){transition-delay:.4s}
+.gallery-item:nth-child(2){transition-delay:.08s}
+.gallery-item:nth-child(3){transition-delay:.12s}
+.gallery-item:nth-child(4){transition-delay:.16s}
+.gallery-item:nth-child(5){transition-delay:.2s}
+.gallery-item:nth-child(6){transition-delay:.24s}
+
+/* ─── RESPONSIVE ─── */
+@media (max-width:1100px){
+  .section-dots{display:none;}
+  .features-section{grid-template-columns:1fr;}
+  .features-left{position:static;height:auto;border-right:none;border-bottom:1px solid var(--line);}
+  .matterport-inner{grid-template-columns:1fr;gap:3rem;}
+}
+@media (max-width:900px){
+  nav{padding:1.1rem 1.5rem;}
+  nav.solid{padding:0.85rem 1.5rem;}
+  .nav-links{display:none;}
+  .hamburger{display:block;}
+  .hero-frame{top:5.5rem;left:1.5rem;right:1.5rem;bottom:1.5rem;}
+  .hero-content{padding:0 1.5rem 3.5rem;}
+  .hero-stats{flex-wrap:wrap;}
+  .stat-item{padding:1.1rem 1.4rem 1.1rem 0;margin-right:1.4rem;}
+  section{padding:5rem 1.5rem;}
+  .features-left{padding:4.5rem 1.5rem;}
+  .features-right{grid-template-columns:1fr;}
+  .feature-card{border-right:none;}
+  .feature-card:nth-last-child(-n+2){border-bottom:1px solid var(--line);}
+  .feature-card:last-child{border-bottom:none;}
+  .gallery-grid{grid-template-columns:1fr 1fr;padding:0 1.5rem;gap:4px;}
+  .gallery-filter-bar{padding:0 1.5rem;}
+  .gallery-header{padding:0 1.5rem;}
+  .gallery-item{height:45vw;}
+  .fp-side-by-side{grid-template-columns:1fr;}
+  .fp-rooms-grid{grid-template-columns:1fr;gap:2rem;}
+  .video-break-content{margin:0 1.5rem;max-width:100%;padding:2rem 1.8rem;}
+  .cta-section{padding:6rem 1.5rem;}
+  footer{flex-direction:column;gap:1rem;padding:2.5rem 1.5rem;text-align:center;}
+  .scroll-hint{display:none;}
+}
+@media (max-width:640px){
+  section{padding:4rem 1.2rem;}
+  .gallery-section{padding:4rem 0;}
+  .gallery-header{padding:0 1.2rem;}
+  .gallery-grid{grid-template-columns:1fr;padding:0 1.2rem;}
+  .gallery-filter-bar{padding:0 1.2rem;}
+  .gallery-item{height:58vw;}
+  .features-left{padding:3.5rem 1.2rem;}
+  .feature-card{padding:2.6rem 1.5rem;}
+  .hero-content{padding:0 1.2rem 2.5rem;}
+  .hero-stats{gap:0;}
+  .stat-number{font-size:1.9rem;}
+  .hero-ctas{flex-direction:column;}
+  .hero-ctas .btn-primary,.hero-ctas .btn-outline{width:100%;justify-content:center;}
+  .floorplan-img-wrap{padding:1rem;}
+  .fp-mp-btn{width:100%;justify-content:center;}
+  .fp-dot{width:28px;height:28px;}
+  .fp-dot-popup{width:min(200px,78vw);}
+  .video-break{height:62vh;min-height:300px;}
+}
+</style>
+</head>
+<body>
+
+<nav id="mainNav">
+  <a href="#" class="nav-logo">The Bridgeford <span>Turtle Creek</span></a>
+  <ul class="nav-links">
+    <li><a href="#features">Features</a></li>
+    <li><a href="#gallery">Gallery</a></li>
+    <li><a href="#floorplans">Floor Plans</a></li>
+    <li><a href="#exterior">Flyover</a></li>
+    <li><a href="#tour">3D Tour</a></li>
+    <li><a href="#contact" class="nav-cta">Inquire Now</a></li>
+  </ul>
+  <button class="hamburger" id="hamburger" onclick="toggleMobile()">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#features" onclick="toggleMobile()">Features</a>
+  <a href="#gallery" onclick="toggleMobile()">Gallery</a>
+  <a href="#floorplans" onclick="toggleMobile()">Floor Plans</a>
+  <a href="#exterior" onclick="toggleMobile()">Flyover</a>
+  <a href="#tour" onclick="toggleMobile()">3D Tour</a>
+  <a href="#contact" onclick="toggleMobile()" style="color:var(--clay-light);">Inquire Now</a>
+</div>
+
+<div class="section-dots" id="sectionDots">
+  <div class="section-dot active" data-section="hero"><span class="dot-label">Home</span></div>
+  <div class="section-dot" data-section="features"><span class="dot-label">Features</span></div>
+  <div class="section-dot" data-section="gallery"><span class="dot-label">Gallery</span></div>
+  <div class="section-dot" data-section="floorplans"><span class="dot-label">Floor Plans</span></div>
+  <div class="section-dot" data-section="exterior"><span class="dot-label">Flyover</span></div>
+  <div class="section-dot" data-section="tour"><span class="dot-label">3D Tour</span></div>
+  <div class="section-dot" data-section="contact"><span class="dot-label">Inquire</span></div>
+</div>
+
+<section class="hero" id="hero">
+  <div class="hero-bg">
+    <div class="hero-bg-fallback"></div>
+    <div class="hero-video-wrap"><div id="hero-yt-player"></div></div>
+  </div>
+  <div class="hero-overlay"></div>
+  <div class="hero-frame"></div>
+  <div class="hero-content">
+    <div class="hero-eyebrow eyebrow">Introducing the Model</div>
+    <h1 class="hero-title">The<br><em>Bridgeford</em></h1>
+    <p class="hero-subtitle">Single-floor living at its finest — an open, airy ranch design with vaulted ceilings, a private master retreat, and every amenity on one level.</p>
+    <div class="hero-stats">
+      <div class="stat-item"><div class="stat-number">3</div><div class="stat-label">Bedrooms</div></div>
+      <div class="stat-item"><div class="stat-number">2.5</div><div class="stat-label">Bathrooms</div></div>
+      <div class="stat-item"><div class="stat-number">1,585</div><div class="stat-label">Square Feet</div></div>
+      <div class="stat-item"><div class="stat-number">Ranch</div><div class="stat-label">Single Floor</div></div>
+      <div class="stat-item"><div class="stat-number">26'×31'</div><div class="stat-label">Garage</div></div>
+    </div>
+    <div class="hero-ctas">
+      <a href="#" onclick="openMpModal('base',event)" class="btn-primary"><span>▶</span> 3D Virtual Tour</a>
+      <a href="#gallery" class="btn-outline">View Gallery</a>
+    </div>
+  </div>
+  <div class="scroll-hint"><span>Explore</span><div class="scroll-line"></div></div>
+</section>
+
+<div class="features-section" id="features">
+  <div class="features-left reveal-left">
+    <div class="eyebrow">Thoughtfully Designed</div>
+    <h2 class="section-title">Built for<br><em>how you live</em></h2>
+    <p class="lead">Every inch of The Bridgeford is purposefully arranged — all the space you need on a single level, with a layout that flows naturally from kitchen to living to outdoors.</p>
+    <p class="credit">Designed exclusively for Turtle Creek Homes · Town of Mosel, WI</p>
+    <p class="features-callout">The Bridgeford is available in <strong>two distinct layouts</strong> — see both floor plans and their room lists in the <a href="#floorplans">Floor Plans section ↓</a></p>
+  </div>
+  <div class="features-right">
+    <div class="feature-card reveal">
+      <span class="feature-num">01</span>
+      <div class="feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-4 0v-4a1 1 0 011-1h2a1 1 0 011 1v4m-6 0h6"/></svg></div>
+      <div class="feature-title">Vaulted Ceilings</div>
+      <p class="feature-desc">The open great room soars with vaulted ceilings, creating an airy, expansive feel from the moment you walk through the door.</p>
+    </div>
+    <div class="feature-card reveal">
+      <span class="feature-num">02</span>
+      <div class="feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg></div>
+      <div class="feature-title">Private Master Retreat</div>
+      <p class="feature-desc">The primary bedroom sits apart from the secondary rooms, with an ensuite bath, walk-in closet, and its own private corridor.</p>
+    </div>
+    <div class="feature-card reveal">
+      <span class="feature-num">03</span>
+      <div class="feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg></div>
+      <div class="feature-title">Dedicated Home Office</div>
+      <p class="feature-desc">A proper, separate office — not just a desk nook — keeps work life separated from home life without leaving the house.</p>
+    </div>
+    <div class="feature-card reveal">
+      <span class="feature-num">04</span>
+      <div class="feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></div>
+      <div class="feature-title">Mudroom + Laundry</div>
+      <p class="feature-desc">A generous mudroom with laundry keeps the mess contained. Drop zone, bench, and washer/dryer all in one organized space off the garage.</p>
+    </div>
+    <div class="feature-card reveal">
+      <span class="feature-num">05</span>
+      <div class="feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M18 8h1a4 4 0 010 8h-1M2 8h16v9a4 4 0 01-4 4H6a4 4 0 01-4-4V8z"/><path d="M6 1v3M10 1v3M14 1v3"/></svg></div>
+      <div class="feature-title">Open Kitchen + Dining</div>
+      <p class="feature-desc">The kitchen island anchors the open living space, with sightlines straight through to the family room and a large pantry just steps away.</p>
+    </div>
+    <div class="feature-card reveal">
+      <span class="feature-num">06</span>
+      <div class="feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg></div>
+      <div class="feature-title">Covered Porch</div>
+      <p class="feature-desc">A covered porch out front and back means you're outside no matter the weather — morning coffee, evening wind-down, all year round.</p>
+    </div>
+  </div>
+</div>
+
+<section class="gallery-section" id="gallery">
+  <div class="gallery-header reveal">
+    <div class="eyebrow">Inside the Home</div>
+    <h2 class="section-title">Every detail<br><em>considered</em></h2>
+  </div>
+  <div class="gallery-filter-bar">
+    <button class="gallery-filter-btn active" data-filter="all" onclick="renderGallery('all')">All Photos</button>
+    <button class="gallery-filter-btn" data-filter="base" onclick="renderGallery('base')">Base Layout</button>
+    <button class="gallery-filter-btn" data-filter="v2" onclick="renderGallery('v2')">Variation 2</button>
+  </div>
+  <div class="gallery-grid" id="gallery-grid"></div>
+</section>
+
+<section class="floorplan-section" id="floorplans">
+  <div class="section-head reveal">
+    <div class="eyebrow">The Blueprint</div>
+    <h2 class="section-title">A layout built<br><em>for real life</em></h2>
+  </div>
+  <div class="fp-side-by-side">
+    <div class="fp-col reveal">
+      <div class="fp-col-label">Base Layout</div>
+      <div class="floorplan-img-wrap fp-hotspot-wrap" id="fp-wrap-base">
+        <img id="fp-img-base" src="Bridgeford clean.png" alt="Base Layout" style="max-height:480px;">
+      </div>
+      <a href="#" class="fp-mp-btn" onclick="openMpModal('base',event)">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polygon points="10 8 16 12 10 16 10 8" fill="currentColor" stroke="none"/></svg>
+        Walk Through Base Layout
+      </a>
+    </div>
+    <div class="fp-col reveal">
+      <div class="fp-col-label">Variation 2</div>
+      <div class="floorplan-img-wrap fp-hotspot-wrap" id="fp-wrap-var2">
+        <img id="fp-img-var2" src="bridgeford 2.png" alt="Variation 2" style="max-height:480px;">
+      </div>
+      <a href="#" class="fp-mp-btn" onclick="openMpModal('kitchen',event)">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polygon points="10 8 16 12 10 16 10 8" fill="currentColor" stroke="none"/></svg>
+        Walk Through Variation 2
+      </a>
+    </div>
+  </div>
+  <div class="fp-rooms-grid reveal">
+    <div>
+      <h3>Base Layout — Main Floor</h3>
+      <ul class="room-list">
+        <li>Primary Bedroom with Ensuite Bath &amp; WIC</li>
+        <li>Bedroom 2 (12'×11')</li>
+        <li>Bedroom 3 (12'×10')</li>
+        <li>Full Hall Bath</li>
+        <li>Powder Room</li>
+        <li>Family Room (vaulted ceiling)</li>
+        <li>Kitchen with 4×8 Island (18'×11')</li>
+        <li>Dining Area</li>
+        <li>Entry Foyer</li>
+        <li>Utility Room</li>
+        <li>Garage (26'×31')</li>
+      </ul>
+      <div class="floorplan-note">Everything on one level — master suite, kitchen, family room, and all bedrooms. No stairs, no compromise.</div>
+    </div>
+    <div>
+      <h3>Variation 2 — Main Floor</h3>
+      <ul class="room-list">
+        <li>Primary Bedroom with Ensuite Bath &amp; WIC</li>
+        <li>Bedroom 2 (12'×11')</li>
+        <li>Bedroom 3 (12'×10')</li>
+        <li>Full Hall Bath</li>
+        <li>Family Room (vaulted ceiling)</li>
+        <li>Expanded Kitchen with Island</li>
+        <li>Covered Porch Access</li>
+        <li>Workout / Hobby Room</li>
+        <li>Office</li>
+        <li>Dining Area</li>
+        <li>Entry Foyer</li>
+        <li>Utility Room</li>
+        <li>Garage (26'×31')</li>
+      </ul>
+      <div class="floorplan-note">
+        <strong>Variation 2:</strong> Redesigned layout with an expanded kitchen, covered porch access, workout/hobby room, and a separate office — 2 bathrooms total.
+      </div>
+    </div>
+  </div>
+  <div class="fp-footnote">
+    <p>Every Bridgeford we've built has been a unique mix of these two layouts — and we have new variations arriving later this year. <a href="#contact">Contact us</a> to discuss what's possible.</p>
+  </div>
+</section>
+
+<div class="video-break" id="exterior">
+  <div class="video-break-iframe-wrap"><div id="ext-yt-player"></div></div>
+  <div class="video-break-overlay"></div>
+  <div class="video-break-content reveal-right">
+    <div class="eyebrow">Curb Appeal</div>
+    <h2 class="video-break-title">The view from<br>the <em>street</em></h2>
+    <p class="video-break-desc">A clean ranch profile with a covered front porch, board-and-batten accents, and a two-car garage. Practical and polished from every angle.</p>
+    <a href="https://youtu.be/2kouqeM3I6g?si=_j8F_qmY2pNgPJE6" target="_blank" class="video-break-link">Watch full exterior tour <span class="arrow">→</span></a>
+  </div>
+</div>
+
+<section class="matterport-section" id="tour">
+  <div class="matterport-inner">
+    <div class="matterport-text reveal-left">
+      <div class="eyebrow">Immersive 3D Tour</div>
+      <h2 class="section-title" style="margin-bottom:1.5rem;">Walk every<br><em>room right now</em></h2>
+      <p class="lead">No appointment needed. Explore every room, open hallway, and vaulted ceiling at your own pace.</p>
+      <div class="matterport-features">
+        <div class="mp-feature"><div class="mp-dot"></div>Click anywhere to move through the home room by room</div>
+        <div class="mp-feature"><div class="mp-dot"></div>Dollhouse view shows the full floor plan in 3D</div>
+        <div class="mp-feature"><div class="mp-dot"></div>Built-in measurement tool — check if your furniture fits</div>
+        <div class="mp-feature"><div class="mp-dot"></div>Works on phone, tablet, or desktop</div>
+      </div>
+    </div>
+    <div class="matterport-embed-wrap reveal-right">
+      <div class="matterport-overlay" id="mpOverlay" onclick="openMpModal('base',event)">
+        <!-- PLACEHOLDER: matterport preview image (optional) -->
+        <div class="matterport-play-ring"><div class="matterport-play-icon">▶</div></div>
+        <div class="matterport-cta-label"><span>Click to explore</span>Interactive 3D Walkthrough</div>
+      </div>
+      <iframe id="mpIframe" src="" data-src="https://my.matterport.com/show/?m=NPKyeEE79RQ&play=1&hl=1" allow="fullscreen; xr-spatial-tracking" allowfullscreen></iframe>
+    </div>
+  </div>
+</section>
+
+<section class="cta-section" id="contact">
+  <div class="cta-bg"></div>
+  <div class="cta-content reveal">
+    <div class="eyebrow">Ready to Build Yours?</div>
+    <h2 class="section-title">The Bridgeford is<br><em>waiting for you</em></h2>
+    <p class="cta-desc">Ranch living without the compromises. Two distinct layout options, one incredible single-story home. Reach out to explore lots, pricing, and how to make The Bridgeford yours.</p>
+    <div class="cta-buttons">
+      <a href="#tour" class="btn-primary" onclick="openMpModal('base',event)">Explore Inside</a>
+      <a href="mailto:kristindedering@oostburglumber.com" class="btn-outline">Contact Us</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-mark">The Bridgeford</div>
+  <div>© 2025 Turtle Creek Homes · The Bridgeford Model</div>
+</footer>
+
+<div class="lightbox" id="lightbox">
+  <button class="lightbox-close" onclick="closeLightbox()">✕</button>
+  <button class="lightbox-nav lightbox-prev" onclick="navLightbox(-1)">&#8249;</button>
+  <img src="" id="lightbox-img" alt="">
+  <button class="lightbox-nav lightbox-next" onclick="navLightbox(1)">&#8250;</button>
+</div>
+
+<div class="mp-modal" id="mpModal">
+  <div class="mp-modal-bar">
+    <div class="mp-modal-title">
+      <span id="mpModalLabel">3D Virtual Tour</span>
+      <span id="mpModalVariant"></span>
+    </div>
+    <button class="mp-modal-close" onclick="closeMpModal()">✕ Close</button>
+  </div>
+  <iframe id="mpModalFrame" src="" allow="fullscreen; xr-spatial-tracking" allowfullscreen></iframe>
+</div>
+
+<script>
+/* ─── YouTube background players ─── */
+var heroPlayer, extPlayer;
+window.onYouTubeIframeAPIReady = function() {
+  heroPlayer = new YT.Player('hero-yt-player', {
+    videoId: 'UAxmobHuZ0o',
+    playerVars: { autoplay:1, mute:1, controls:0, showinfo:0, modestbranding:1, playsinline:1, rel:0, start:3, disablekb:1, fs:0, iv_load_policy:3 },
+    events: {
+      onReady: function(e) { e.target.setVolume(0); e.target.playVideo(); },
+      onStateChange: function(e) { if (e.data === YT.PlayerState.ENDED) { e.target.seekTo(3,true); e.target.playVideo(); } }
+    }
+  });
+  extPlayer = new YT.Player('ext-yt-player', {
+    videoId: '2kouqeM3I6g',
+    playerVars: { autoplay:1, mute:1, controls:0, showinfo:0, modestbranding:1, playsinline:1, rel:0, disablekb:1, fs:0, iv_load_policy:3 },
+    events: {
+      onReady: function(e) { e.target.setVolume(0); e.target.playVideo(); },
+      onStateChange: function(e) { if (e.data === YT.PlayerState.ENDED) { e.target.seekTo(0,true); e.target.playVideo(); } }
+    }
+  });
+};
+(function() { var t = document.createElement('script'); t.src = 'https://www.youtube.com/iframe_api'; document.head.appendChild(t); })();
+
+/* ─── Gallery data ─── */
+var galleryData = [
+  { src:'gallery_0.jpg',    label:'Kitchen & Living',  v:'base' },
+  { src:'gallery_1.jpg',    label:'Open Living Area',  v:'base' },
+  { src:'gallery_2.jpg',    label:'Kitchen',           v:'base' },
+  { src:'gallery_3.jpeg',   label:'Primary Bedroom',   v:'base' },
+  { src:'gallery_4.jpg',    label:'Home Office',       v:'base' },
+  { src:'gallery_5.jpg',    label:'Bedroom 2',         v:'base' },
+  { src:'IMG_8305.jpg',     label:'',                  v:'base' },
+  { src:'IMG_8541.jpg',     label:'',                  v:'base' },
+  { src:'IMG_8543.jpg',     label:'',                  v:'base' },
+  { src:'IMG_8544.jpg',     label:'',                  v:'base' },
+  { src:'IMG_8545.jpg',     label:'',                  v:'base' },
+  { src:'IMG_9077.jpg',     label:'',                  v:'base' },
+  { src:'IMG_9732.jpeg',    label:'',                  v:'base' },
+  { src:'IMG_9736.jpeg',    label:'',                  v:'base' },
+  { src:'IMG_9738.jpeg',    label:'',                  v:'base' },
+  { src:'IMG_9938.JPG',     label:'',                  v:'base' },
+  { src:'var2_IMG_2630.jpg',label:'',                  v:'v2'   },
+  { src:'var2_IMG_2633.jpg',label:'',                  v:'v2'   },
+  { src:'var2_IMG_4497.jpg',label:'',                  v:'v2'   },
+  { src:'var2_IMG_4501.jpg',label:'',                  v:'v2'   },
+  { src:'var2_IMG_4513.jpg',label:'',                  v:'v2'   },
+  { src:'var2_IMG_4515.jpg',label:'',                  v:'v2'   },
+  { src:'var2_IMG_4944.jpg',label:'',                  v:'v2'   },
+];
+var currentLightboxSet = [];
+var currentImg = 0;
+function renderGallery(filter) {
+  var filtered = filter === 'all' ? galleryData : galleryData.filter(function(p){ return p.v === filter; });
+  currentLightboxSet = filtered.map(function(p){ return p.src; });
+  var grid = document.getElementById('gallery-grid');
+  grid.innerHTML = filtered.map(function(p, i) {
+    var badgeText = p.v === 'v2' ? 'Variation 2' : 'Base';
+    var badge = '<span class="gallery-badge ' + p.v + '">' + badgeText + '</span>';
+    var overlay = p.label ? '<div class="overlay"><span class="overlay-label">' + p.label + '</span></div>' : '';
+    return '<div class="gallery-item" onclick="openLightbox(' + i + ')">' +
+      '<img src="' + p.src + '" alt="' + p.label + '" loading="lazy">' + badge + overlay + '</div>';
+  }).join('');
+  document.querySelectorAll('.gallery-filter-btn').forEach(function(b){
+    b.classList.toggle('active', b.dataset.filter === filter);
+  });
+}
+renderGallery('all');
+function openLightbox(idx) { currentImg = idx; document.getElementById('lightbox-img').src = currentLightboxSet[idx]; document.getElementById('lightbox').classList.add('active'); document.body.style.overflow = 'hidden'; }
+function closeLightbox() { document.getElementById('lightbox').classList.remove('active'); document.body.style.overflow = ''; }
+function navLightbox(dir) { currentImg = (currentImg + dir + currentLightboxSet.length) % currentLightboxSet.length; document.getElementById('lightbox-img').src = currentLightboxSet[currentImg]; }
+document.getElementById('lightbox').addEventListener('click', function(e) { if (e.target === this) closeLightbox(); });
+document.addEventListener('keydown', function(e) { if (!document.getElementById('lightbox').classList.contains('active')) return; if (e.key === 'Escape') closeLightbox(); if (e.key === 'ArrowLeft') navLightbox(-1); if (e.key === 'ArrowRight') navLightbox(1); });
+
+/* ─── Matterport ─── */
+function activateMatterport() { const iframe = document.getElementById('mpIframe'); const overlay = document.getElementById('mpOverlay'); iframe.src = iframe.dataset.src; overlay.classList.add('hidden'); }
+var MATTERPORT_BASE_URL = 'https://my.matterport.com/show/?m=NPKyeEE79RQ&play=1&hl=1';
+var MATTERPORT_KITCHEN_URL = 'https://my.matterport.com/show/?m=BKQJL22TmKx&play=1&hl=1';
+function openMpModal(variant, e) {
+  if (e) e.preventDefault();
+  var modal = document.getElementById('mpModal');
+  var frame = document.getElementById('mpModalFrame');
+  var label = document.getElementById('mpModalVariant');
+  if (variant === 'kitchen') { frame.src = MATTERPORT_KITCHEN_URL; label.textContent = 'Variation 2 — full walkthrough'; }
+  else { frame.src = MATTERPORT_BASE_URL; label.textContent = 'Base Layout — full walkthrough'; }
+  modal.classList.add('active'); document.body.style.overflow = 'hidden';
+}
+function closeMpModal() { document.getElementById('mpModal').classList.remove('active'); document.getElementById('mpModalFrame').src = ''; document.body.style.overflow = ''; }
+document.addEventListener('keydown', function(e) { if (e.key === 'Escape' && document.getElementById('mpModal').classList.contains('active')) closeMpModal(); });
+
+/* ─── Nav scroll state ─── */
+var nav = document.getElementById('mainNav');
+window.addEventListener('scroll', function() { nav.classList.toggle('solid', window.scrollY > 60); });
+
+/* ─── Reveal on scroll ─── */
+var revealObserver = new IntersectionObserver(function(entries) {
+  entries.forEach(function(e) { if (e.isIntersecting) e.target.classList.add('visible'); });
+}, { threshold: 0.1 });
+document.querySelectorAll('.reveal, .reveal-left, .reveal-right').forEach(function(el) { revealObserver.observe(el); });
+
+/* ─── Section dots + dark-section inversion ─── */
+var sections = ['hero','features','gallery','floorplans','exterior','tour','contact'];
+var darkSections = ['hero','gallery','exterior','contact'];
+var dots = document.querySelectorAll('.section-dot');
+var dotsWrap = document.getElementById('sectionDots');
+var sectionObserverDots = new IntersectionObserver(function(entries) {
+  entries.forEach(function(entry) {
+    if (entry.isIntersecting) {
+      dots.forEach(function(d) { d.classList.remove('active'); });
+      var idx = sections.indexOf(entry.target.id);
+      if (idx >= 0 && dots[idx]) dots[idx].classList.add('active');
+      dotsWrap.classList.toggle('on-dark', darkSections.indexOf(entry.target.id) >= 0);
+    }
+  });
+}, { threshold: 0.3 });
+sections.forEach(function(id) { var el = document.getElementById(id); if (el) sectionObserverDots.observe(el); });
+dots.forEach(function(dot) {
+  dot.addEventListener('click', function() {
+    var el = document.getElementById(dot.getAttribute('data-section'));
+    if (el) el.scrollIntoView({ behavior: 'smooth' });
+  });
+});
+
+/* ─── Mobile menu ─── */
+function toggleMobile() {
+  document.getElementById('hamburger').classList.toggle('open');
+  document.getElementById('mobileMenu').classList.toggle('open');
+  document.body.style.overflow = document.getElementById('mobileMenu').classList.contains('open') ? 'hidden' : '';
+}
+
+/* ─── Floor plan hotspot dots ───
+   To add a point, push into fpHotspots.base or fpHotspots.var2:
+     fpHotspots.base.push({ x:45, y:38, label:'Kitchen', img:'photo.jpg' });
+   x / y  — % (0–100) from the top-left of the floor plan image
+   label  — room name shown under the popup
+   img    — image path (or '' for label-only)
+*/
+var fpHotspots = {
+  base: [
+    { x:50.5, y:68.5, label:"Primary Bedroom", img:'gallery_3.jpeg' },
+    { x:16.8, y:33.8, label:"Bedroom 2",       img:'gallery_5.jpg' },
+    { x:17.7, y:76.5, label:"Bedroom 3",       img:'gallery_4.jpg' },
+    { x:27.5, y:69.4, label:"Living Room",     img:'gallery_0.jpg' },
+    { x:39,   y:45.1, label:"Kitchen",         img:'gallery_2.jpg' }
+  ],
+  var2: [
+    { x:30.7, y:49.4, label:"Kitchen",         img:"var2_IMG_4497.jpg" },
+    { x:36.5, y:91.6, label:"Front",           img:"var2_IMG_4944.jpg" },
+    { x:25.9, y:13,   label:"Back Porch",      img:"var2_IMG_2630.jpg" },
+    { x:53.5, y:53.9, label:"Master Bathroom", img:"var2_IMG_4513.jpg" },
+    { x:49.2, y:41.3, label:"Master Shower",   img:"var2_IMG_4515.jpg" },
+    { x:10.6, y:53.8, label:"Guest Bath",      img:"var2_IMG_2633.jpg" }
+  ]
+};
+
+(function() {
+  function renderWrap(wrapId, imgId, points) {
+    var wrap = document.getElementById(wrapId);
+    var img  = document.getElementById(imgId);
+    if (!wrap || !img || !points.length) return;
+    function place() {
+      wrap.querySelectorAll('.fp-dot').forEach(function(d) { d.remove(); });
+      var iR = img.getBoundingClientRect();
+      var wR = wrap.getBoundingClientRect();
+      var offX = iR.left - wR.left;
+      var offY = iR.top  - wR.top;
+      points.forEach(function(pt) {
+        var dot = document.createElement('div');
+        dot.className = 'fp-dot';
+        dot.style.left = (offX + pt.x / 100 * iR.width)  + 'px';
+        dot.style.top  = (offY + pt.y / 100 * iR.height) + 'px';
+        var popup = document.createElement('div');
+        popup.className = 'fp-dot-popup';
+        if (pt.img) {
+          var pi = document.createElement('img');
+          pi.src = pt.img;
+          pi.alt = pt.label;
+          popup.appendChild(pi);
+        }
+        var lbl = document.createElement('div');
+        lbl.className = 'fp-dot-label';
+        lbl.textContent = pt.label;
+        popup.appendChild(lbl);
+        dot.appendChild(popup);
+        dot.addEventListener('click', function(e) {
+          e.stopPropagation();
+          var wasActive = this.classList.contains('active');
+          document.querySelectorAll('.fp-dot').forEach(function(d) { d.classList.remove('active'); });
+          if (!wasActive) this.classList.add('active');
+        });
+        wrap.appendChild(dot);
+      });
+    }
+    if (img.complete && img.naturalWidth) place();
+    else img.addEventListener('load', place);
+    window.addEventListener('resize', place);
+  }
+  document.addEventListener('click', function() {
+    document.querySelectorAll('.fp-dot').forEach(function(d) { d.classList.remove('active'); });
+  });
+  document.addEventListener('DOMContentLoaded', function() {
+    renderWrap('fp-wrap-base', 'fp-img-base', fpHotspots.base);
+    renderWrap('fp-wrap-var2', 'fp-img-var2', fpHotspots.var2);
+  });
+})();
+</script>
+
+</body>
+</html>
